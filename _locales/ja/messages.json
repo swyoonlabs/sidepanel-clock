@@ -1,0 +1,185 @@
+{
+  "appName": {
+    "message": "サイドパネル時計"
+  },
+  "appDesc": {
+    "message": "サイドパネルにいつも表示 — 時計・世界時計・タイマー・ポモドーロ。"
+  },
+  "themeToggle": {
+    "message": "テーマ切替"
+  },
+  "opt24h": {
+    "message": "24時間"
+  },
+  "optSeconds": {
+    "message": "秒"
+  },
+  "optAnalog": {
+    "message": "アナログ"
+  },
+  "segWorld": {
+    "message": "世界時計"
+  },
+  "segTimer": {
+    "message": "タイマー"
+  },
+  "segPomodoro": {
+    "message": "ポモドーロ"
+  },
+  "add": {
+    "message": "追加"
+  },
+  "worldEmpty": {
+    "message": "都市を追加して世界の時刻を確認しましょう。"
+  },
+  "unitHour": {
+    "message": "時"
+  },
+  "unitMin": {
+    "message": "分"
+  },
+  "unitSec": {
+    "message": "秒"
+  },
+  "nMin": {
+    "message": "$1分"
+  },
+  "start": {
+    "message": "開始"
+  },
+  "running": {
+    "message": "実行中"
+  },
+  "resume": {
+    "message": "再開"
+  },
+  "pause": {
+    "message": "一時停止"
+  },
+  "reset": {
+    "message": "リセット"
+  },
+  "skip": {
+    "message": "スキップ"
+  },
+  "resetSession": {
+    "message": "セッションをリセット"
+  },
+  "phaseFocus": {
+    "message": "集中"
+  },
+  "phaseShort": {
+    "message": "小休憩"
+  },
+  "phaseLong": {
+    "message": "長い休憩"
+  },
+  "pomoCount": {
+    "message": "🍅 今日 $1回"
+  },
+  "offsetSame": {
+    "message": "現地と同じ"
+  },
+  "offsetDiff": {
+    "message": "現地 $1時間"
+  },
+  "timerDoneTitle": {
+    "message": "⏲️ タイマー終了"
+  },
+  "timerDoneMsg": {
+    "message": "時間になりました！"
+  },
+  "pomoTitle": {
+    "message": "🍅 ポモドーロ"
+  },
+  "pomoBreakMsg": {
+    "message": "少し休憩しましょう ☕"
+  },
+  "pomoLongBreakMsg": {
+    "message": "長めに休憩を！🎉"
+  },
+  "pomoFocusMsg": {
+    "message": "集中の時間です！🍅"
+  },
+  "aboutTitle": {
+    "message": "アプリについて"
+  },
+  "aboutBlog": {
+    "message": "開発者ブログ"
+  },
+  "aboutGithub": {
+    "message": "GitHub"
+  },
+  "aboutPrivacy": {
+    "message": "プライバシーポリシー"
+  },
+  "aboutRate": {
+    "message": "評価する"
+  },
+  "aboutMadeBy": {
+    "message": "Swyoon Labs 制作"
+  },
+  "close": {
+    "message": "閉じる"
+  },
+  "city_seoul": {
+    "message": "ソウル"
+  },
+  "city_tokyo": {
+    "message": "東京"
+  },
+  "city_beijing": {
+    "message": "北京"
+  },
+  "city_hongkong": {
+    "message": "香港"
+  },
+  "city_singapore": {
+    "message": "シンガポール"
+  },
+  "city_bangkok": {
+    "message": "バンコク"
+  },
+  "city_delhi": {
+    "message": "デリー"
+  },
+  "city_dubai": {
+    "message": "ドバイ"
+  },
+  "city_moscow": {
+    "message": "モスクワ"
+  },
+  "city_london": {
+    "message": "ロンドン"
+  },
+  "city_paris": {
+    "message": "パリ"
+  },
+  "city_berlin": {
+    "message": "ベルリン"
+  },
+  "city_newyork": {
+    "message": "ニューヨーク"
+  },
+  "city_chicago": {
+    "message": "シカゴ"
+  },
+  "city_losangeles": {
+    "message": "ロサンゼルス"
+  },
+  "city_saopaulo": {
+    "message": "サンパウロ"
+  },
+  "city_sydney": {
+    "message": "シドニー"
+  },
+  "city_auckland": {
+    "message": "オークランド"
+  },
+  "city_honolulu": {
+    "message": "ホノルル"
+  },
+  "city_utc": {
+    "message": "UTC"
+  }
+}

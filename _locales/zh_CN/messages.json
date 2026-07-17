@@ -1,0 +1,185 @@
+{
+  "appName": {
+    "message": "侧边栏时钟"
+  },
+  "appDesc": {
+    "message": "常驻侧边栏的时钟 — 时钟、世界时钟、计时器和番茄钟。"
+  },
+  "themeToggle": {
+    "message": "切换主题"
+  },
+  "opt24h": {
+    "message": "24小时"
+  },
+  "optSeconds": {
+    "message": "秒"
+  },
+  "optAnalog": {
+    "message": "模拟"
+  },
+  "segWorld": {
+    "message": "世界时钟"
+  },
+  "segTimer": {
+    "message": "计时器"
+  },
+  "segPomodoro": {
+    "message": "番茄钟"
+  },
+  "add": {
+    "message": "添加"
+  },
+  "worldEmpty": {
+    "message": "添加城市以查看当地时间。"
+  },
+  "unitHour": {
+    "message": "时"
+  },
+  "unitMin": {
+    "message": "分"
+  },
+  "unitSec": {
+    "message": "秒"
+  },
+  "nMin": {
+    "message": "$1分钟"
+  },
+  "start": {
+    "message": "开始"
+  },
+  "running": {
+    "message": "运行中"
+  },
+  "resume": {
+    "message": "继续"
+  },
+  "pause": {
+    "message": "暂停"
+  },
+  "reset": {
+    "message": "重置"
+  },
+  "skip": {
+    "message": "跳过"
+  },
+  "resetSession": {
+    "message": "重置会话"
+  },
+  "phaseFocus": {
+    "message": "专注"
+  },
+  "phaseShort": {
+    "message": "短休息"
+  },
+  "phaseLong": {
+    "message": "长休息"
+  },
+  "pomoCount": {
+    "message": "🍅 今天 $1 次"
+  },
+  "offsetSame": {
+    "message": "与本地相同"
+  },
+  "offsetDiff": {
+    "message": "本地 $1 小时"
+  },
+  "timerDoneTitle": {
+    "message": "⏲️ 计时结束"
+  },
+  "timerDoneMsg": {
+    "message": "时间到！"
+  },
+  "pomoTitle": {
+    "message": "🍅 番茄钟"
+  },
+  "pomoBreakMsg": {
+    "message": "休息一下吧 ☕"
+  },
+  "pomoLongBreakMsg": {
+    "message": "好好休息一下！🎉"
+  },
+  "pomoFocusMsg": {
+    "message": "该专注了！🍅"
+  },
+  "aboutTitle": {
+    "message": "关于"
+  },
+  "aboutBlog": {
+    "message": "开发者博客"
+  },
+  "aboutGithub": {
+    "message": "GitHub"
+  },
+  "aboutPrivacy": {
+    "message": "隐私政策"
+  },
+  "aboutRate": {
+    "message": "给个好评"
+  },
+  "aboutMadeBy": {
+    "message": "由 Swyoon Labs 制作"
+  },
+  "close": {
+    "message": "关闭"
+  },
+  "city_seoul": {
+    "message": "首尔"
+  },
+  "city_tokyo": {
+    "message": "东京"
+  },
+  "city_beijing": {
+    "message": "北京"
+  },
+  "city_hongkong": {
+    "message": "香港"
+  },
+  "city_singapore": {
+    "message": "新加坡"
+  },
+  "city_bangkok": {
+    "message": "曼谷"
+  },
+  "city_delhi": {
+    "message": "德里"
+  },
+  "city_dubai": {
+    "message": "迪拜"
+  },
+  "city_moscow": {
+    "message": "莫斯科"
+  },
+  "city_london": {
+    "message": "伦敦"
+  },
+  "city_paris": {
+    "message": "巴黎"
+  },
+  "city_berlin": {
+    "message": "柏林"
+  },
+  "city_newyork": {
+    "message": "纽约"
+  },
+  "city_chicago": {
+    "message": "芝加哥"
+  },
+  "city_losangeles": {
+    "message": "洛杉矶"
+  },
+  "city_saopaulo": {
+    "message": "圣保罗"
+  },
+  "city_sydney": {
+    "message": "悉尼"
+  },
+  "city_auckland": {
+    "message": "奥克兰"
+  },
+  "city_honolulu": {
+    "message": "檀香山"
+  },
+  "city_utc": {
+    "message": "UTC"
+  }
+}

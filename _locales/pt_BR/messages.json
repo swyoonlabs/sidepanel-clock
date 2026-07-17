@@ -1,0 +1,185 @@
+{
+  "appName": {
+    "message": "Relógio no Painel Lateral"
+  },
+  "appDesc": {
+    "message": "Relógio, relógio mundial, timer e Pomodoro sempre ao seu lado no painel."
+  },
+  "themeToggle": {
+    "message": "Alternar tema"
+  },
+  "opt24h": {
+    "message": "24 horas"
+  },
+  "optSeconds": {
+    "message": "Segundos"
+  },
+  "optAnalog": {
+    "message": "Analógico"
+  },
+  "segWorld": {
+    "message": "Mundial"
+  },
+  "segTimer": {
+    "message": "Timer"
+  },
+  "segPomodoro": {
+    "message": "Pomodoro"
+  },
+  "add": {
+    "message": "Adicionar"
+  },
+  "worldEmpty": {
+    "message": "Adicione uma cidade para ver o horário local."
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "unitMin": {
+    "message": "min"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "nMin": {
+    "message": "$1 min"
+  },
+  "start": {
+    "message": "Iniciar"
+  },
+  "running": {
+    "message": "Em curso"
+  },
+  "resume": {
+    "message": "Retomar"
+  },
+  "pause": {
+    "message": "Pausar"
+  },
+  "reset": {
+    "message": "Reiniciar"
+  },
+  "skip": {
+    "message": "Pular"
+  },
+  "resetSession": {
+    "message": "Reiniciar sessões"
+  },
+  "phaseFocus": {
+    "message": "Foco"
+  },
+  "phaseShort": {
+    "message": "Pausa curta"
+  },
+  "phaseLong": {
+    "message": "Pausa longa"
+  },
+  "pomoCount": {
+    "message": "🍅 Hoje: $1"
+  },
+  "offsetSame": {
+    "message": "Igual ao local"
+  },
+  "offsetDiff": {
+    "message": "$1 h vs local"
+  },
+  "timerDoneTitle": {
+    "message": "⏲️ Timer concluído"
+  },
+  "timerDoneMsg": {
+    "message": "Tempo esgotado!"
+  },
+  "pomoTitle": {
+    "message": "🍅 Pomodoro"
+  },
+  "pomoBreakMsg": {
+    "message": "Faça uma pausa ☕"
+  },
+  "pomoLongBreakMsg": {
+    "message": "Hora de uma pausa longa! 🎉"
+  },
+  "pomoFocusMsg": {
+    "message": "Hora de focar! 🍅"
+  },
+  "aboutTitle": {
+    "message": "Sobre"
+  },
+  "aboutBlog": {
+    "message": "Blog do desenvolvedor"
+  },
+  "aboutGithub": {
+    "message": "GitHub"
+  },
+  "aboutPrivacy": {
+    "message": "Política de privacidade"
+  },
+  "aboutRate": {
+    "message": "Avaliar a extensão"
+  },
+  "aboutMadeBy": {
+    "message": "Feito por Swyoon Labs"
+  },
+  "close": {
+    "message": "Fechar"
+  },
+  "city_seoul": {
+    "message": "Seul"
+  },
+  "city_tokyo": {
+    "message": "Tóquio"
+  },
+  "city_beijing": {
+    "message": "Pequim"
+  },
+  "city_hongkong": {
+    "message": "Hong Kong"
+  },
+  "city_singapore": {
+    "message": "Singapura"
+  },
+  "city_bangkok": {
+    "message": "Bangkok"
+  },
+  "city_delhi": {
+    "message": "Déli"
+  },
+  "city_dubai": {
+    "message": "Dubai"
+  },
+  "city_moscow": {
+    "message": "Moscou"
+  },
+  "city_london": {
+    "message": "Londres"
+  },
+  "city_paris": {
+    "message": "Paris"
+  },
+  "city_berlin": {
+    "message": "Berlim"
+  },
+  "city_newyork": {
+    "message": "Nova York"
+  },
+  "city_chicago": {
+    "message": "Chicago"
+  },
+  "city_losangeles": {
+    "message": "Los Angeles"
+  },
+  "city_saopaulo": {
+    "message": "São Paulo"
+  },
+  "city_sydney": {
+    "message": "Sydney"
+  },
+  "city_auckland": {
+    "message": "Auckland"
+  },
+  "city_honolulu": {
+    "message": "Honolulu"
+  },
+  "city_utc": {
+    "message": "UTC"
+  }
+}

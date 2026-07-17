@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Side Panel Clock</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <!-- 상단: 항상 보이는 큰 시계 -->
+  <section class="hero" id="hero">
+    <button id="aboutBtn" class="icon-btn hero-info" data-i18n-title="aboutTitle" aria-label="about">ℹ️</button>
+    <button id="themeToggle" class="icon-btn hero-theme" data-i18n-title="themeToggle" aria-label="theme">🌙</button>
+    <canvas id="analog" width="300" height="300" aria-hidden="true"></canvas>
+    <div id="digitalTime" class="hero-time">--:--</div>
+    <div id="digitalDate" class="hero-date">----</div>
+    <div class="hero-options">
+      <button class="opt" id="opt24h" data-on="false" data-i18n="opt24h">24h</button>
+      <button class="opt" id="optSeconds" data-on="true" data-i18n="optSeconds">Seconds</button>
+      <button class="opt" id="optAnalog" data-on="true" data-i18n="optAnalog">Analog</button>
+    </div>
+  </section>
+
+  <!-- 세그먼트 전환 -->
+  <nav class="segment">
+    <button class="seg active" data-view="world"><span class="si">🌍</span><span data-i18n="segWorld">World</span></button>
+    <button class="seg" data-view="timer"><span class="si">⏲️</span><span data-i18n="segTimer">Timer</span></button>
+    <button class="seg" data-view="pomodoro"><span class="si">🍅</span><span data-i18n="segPomodoro">Pomodoro</span></button>
+  </nav>
+
+  <!-- 하단: 전환 콘텐츠 -->
+  <main class="content">
+    <!-- 세계시계 -->
+    <section id="view-world" class="view active">
+      <div class="add-row">
+        <select id="tzSelect"></select>
+        <button id="tzAdd" class="btn primary" data-i18n="add">Add</button>
+      </div>
+      <ul id="worldList" class="world-list"></ul>
+      <p id="worldEmpty" class="empty" data-i18n="worldEmpty">Add a city to see its local time.</p>
+    </section>
+
+    <!-- 타이머 -->
+    <section id="view-timer" class="view">
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="ring-track" cx="100" cy="100" r="90" />
+          <circle class="ring-prog" id="timerRing" cx="100" cy="100" r="90" />
+        </svg>
+        <div class="ring-center">
+          <div class="ring-time" id="timerDisplay">05:00</div>
+        </div>
+      </div>
+      <div class="timer-inputs" id="timerInputs">
+        <div class="spin">
+          <input type="number" id="tHours" min="0" max="99" value="0" /><span data-i18n="unitHour">h</span>
+        </div>
+        <div class="spin">
+          <input type="number" id="tMins" min="0" max="59" value="5" /><span data-i18n="unitMin">m</span>
+        </div>
+        <div class="spin">
+          <input type="number" id="tSecs" min="0" max="59" value="0" /><span data-i18n="unitSec">s</span>
+        </div>
+      </div>
+      <div class="presets">
+        <button class="chip" data-sec="60"></button>
+        <button class="chip" data-sec="180"></button>
+        <button class="chip" data-sec="300"></button>
+        <button class="chip" data-sec="600"></button>
+        <button class="chip" data-sec="1500"></button>
+      </div>
+      <div class="btn-row">
+        <button id="timerStart" class="btn primary" data-i18n="start">Start</button>
+        <button id="timerPause" class="btn" disabled data-i18n="pause">Pause</button>
+        <button id="timerReset" class="btn" disabled data-i18n="reset">Reset</button>
+      </div>
+    </section>
+
+    <!-- 뽀모도로 -->
+    <section id="view-pomodoro" class="view">
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="ring-track" cx="100" cy="100" r="90" />
+          <circle class="ring-prog" id="pomoRing" cx="100" cy="100" r="90" />
+        </svg>
+        <div class="ring-center">
+          <div class="pomo-phase" id="pomoPhase">Focus</div>
+          <div class="ring-time" id="pomoDisplay">25:00</div>
+          <div class="pomo-count" id="pomoCount">🍅 0</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button id="pomoStart" class="btn primary" data-i18n="start">Start</button>
+        <button id="pomoPause" class="btn" disabled data-i18n="pause">Pause</button>
+        <button id="pomoSkip" class="btn" data-i18n="skip">Skip</button>
+      </div>
+      <div class="pomo-cfg">
+        <label><span data-i18n="phaseFocus">Focus</span> <input type="number" id="pomoFocus" min="1" max="90" value="25" /><span data-i18n="unitMin">m</span></label>
+        <label><span data-i18n="phaseShort">Break</span> <input type="number" id="pomoShort" min="1" max="60" value="5" /><span data-i18n="unitMin">m</span></label>
+        <label><span data-i18n="phaseLong">Long</span> <input type="number" id="pomoLong" min="1" max="60" value="15" /><span data-i18n="unitMin">m</span></label>
+      </div>
+      <button id="pomoReset" class="btn full-reset" data-i18n="resetSession">Reset sessions</button>
+    </section>
+  </main>
+
+  <!-- 정보(About) 오버레이 -->
+  <div id="aboutOverlay" class="overlay" hidden>
+    <div class="sheet">
+      <button id="aboutClose" class="icon-btn sheet-close" data-i18n-title="close" aria-label="close">✕</button>
+      <img class="about-icon" src="icons/icon128.png" alt="" />
+      <div class="about-name">Side Panel Clock</div>
+      <div class="about-ver" id="aboutVer">v1.0.0</div>
+      <p class="about-desc" data-i18n="appDesc">Clock, world clock, timer and Pomodoro.</p>
+      <div class="about-links">
+        <a id="linkBlog" class="about-link primary" href="https://swyoonlabs.blogspot.com/" target="_blank" rel="noopener">
+          <span class="li">📝</span><span data-i18n="aboutBlog">Developer Blog</span><span class="chev">›</span>
+        </a>
+        <a id="linkRate" class="about-link" href="#" target="_blank" rel="noopener">
+          <span class="li">⭐</span><span data-i18n="aboutRate">Rate this extension</span><span class="chev">›</span>
+        </a>
+        <a id="linkGithub" class="about-link" href="https://github.com/swyoonlabs/sidepanel-clock" target="_blank" rel="noopener">
+          <span class="li">🔗</span><span data-i18n="aboutGithub">GitHub</span><span class="chev">›</span>
+        </a>
+        <a id="linkPrivacy" class="about-link" href="https://github.com/swyoonlabs/sidepanel-clock/blob/main/privacy-policy.html" target="_blank" rel="noopener">
+          <span class="li">🔒</span><span data-i18n="aboutPrivacy">Privacy Policy</span><span class="chev">›</span>
+        </a>
+      </div>
+      <div class="about-made" data-i18n="aboutMadeBy">Made by Swyoon Labs</div>
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

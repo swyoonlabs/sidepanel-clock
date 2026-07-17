@@ -1,0 +1,185 @@
+{
+  "appName": {
+    "message": "Seitenleisten-Uhr"
+  },
+  "appDesc": {
+    "message": "Uhr, Weltuhr, Timer und Pomodoro – immer griffbereit in der Seitenleiste."
+  },
+  "themeToggle": {
+    "message": "Thema wechseln"
+  },
+  "opt24h": {
+    "message": "24-Std"
+  },
+  "optSeconds": {
+    "message": "Sekunden"
+  },
+  "optAnalog": {
+    "message": "Analog"
+  },
+  "segWorld": {
+    "message": "Weltuhr"
+  },
+  "segTimer": {
+    "message": "Timer"
+  },
+  "segPomodoro": {
+    "message": "Pomodoro"
+  },
+  "add": {
+    "message": "Hinzuf."
+  },
+  "worldEmpty": {
+    "message": "Stadt hinzufügen, um die Ortszeit zu sehen."
+  },
+  "unitHour": {
+    "message": "Std"
+  },
+  "unitMin": {
+    "message": "Min"
+  },
+  "unitSec": {
+    "message": "Sek"
+  },
+  "nMin": {
+    "message": "$1 Min"
+  },
+  "start": {
+    "message": "Start"
+  },
+  "running": {
+    "message": "Läuft"
+  },
+  "resume": {
+    "message": "Weiter"
+  },
+  "pause": {
+    "message": "Pause"
+  },
+  "reset": {
+    "message": "Zurücks."
+  },
+  "skip": {
+    "message": "Überspr."
+  },
+  "resetSession": {
+    "message": "Sitzungen zurücksetzen"
+  },
+  "phaseFocus": {
+    "message": "Fokus"
+  },
+  "phaseShort": {
+    "message": "Kurze Pause"
+  },
+  "phaseLong": {
+    "message": "Lange Pause"
+  },
+  "pomoCount": {
+    "message": "🍅 Heute: $1"
+  },
+  "offsetSame": {
+    "message": "Wie lokal"
+  },
+  "offsetDiff": {
+    "message": "$1 Std vs lokal"
+  },
+  "timerDoneTitle": {
+    "message": "⏲️ Timer beendet"
+  },
+  "timerDoneMsg": {
+    "message": "Zeit ist um!"
+  },
+  "pomoTitle": {
+    "message": "🍅 Pomodoro"
+  },
+  "pomoBreakMsg": {
+    "message": "Kurze Pause ☕"
+  },
+  "pomoLongBreakMsg": {
+    "message": "Zeit für eine lange Pause! 🎉"
+  },
+  "pomoFocusMsg": {
+    "message": "Zeit zu fokussieren! 🍅"
+  },
+  "aboutTitle": {
+    "message": "Info"
+  },
+  "aboutBlog": {
+    "message": "Entwickler-Blog"
+  },
+  "aboutGithub": {
+    "message": "GitHub"
+  },
+  "aboutPrivacy": {
+    "message": "Datenschutz"
+  },
+  "aboutRate": {
+    "message": "Bewerten"
+  },
+  "aboutMadeBy": {
+    "message": "Von Swyoon Labs"
+  },
+  "close": {
+    "message": "Schließen"
+  },
+  "city_seoul": {
+    "message": "Seoul"
+  },
+  "city_tokyo": {
+    "message": "Tokio"
+  },
+  "city_beijing": {
+    "message": "Peking"
+  },
+  "city_hongkong": {
+    "message": "Hongkong"
+  },
+  "city_singapore": {
+    "message": "Singapur"
+  },
+  "city_bangkok": {
+    "message": "Bangkok"
+  },
+  "city_delhi": {
+    "message": "Delhi"
+  },
+  "city_dubai": {
+    "message": "Dubai"
+  },
+  "city_moscow": {
+    "message": "Moskau"
+  },
+  "city_london": {
+    "message": "London"
+  },
+  "city_paris": {
+    "message": "Paris"
+  },
+  "city_berlin": {
+    "message": "Berlin"
+  },
+  "city_newyork": {
+    "message": "New York"
+  },
+  "city_chicago": {
+    "message": "Chicago"
+  },
+  "city_losangeles": {
+    "message": "Los Angeles"
+  },
+  "city_saopaulo": {
+    "message": "São Paulo"
+  },
+  "city_sydney": {
+    "message": "Sydney"
+  },
+  "city_auckland": {
+    "message": "Auckland"
+  },
+  "city_honolulu": {
+    "message": "Honolulu"
+  },
+  "city_utc": {
+    "message": "UTC"
+  }
+}

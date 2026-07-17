@@ -1,0 +1,185 @@
+{
+  "appName": {
+    "message": "사이드 패널 시계"
+  },
+  "appDesc": {
+    "message": "사이드 패널에 곁에 두고 보는 시계 — 시계, 세계시계, 타이머, 뽀모도로."
+  },
+  "themeToggle": {
+    "message": "테마 전환"
+  },
+  "opt24h": {
+    "message": "24시간"
+  },
+  "optSeconds": {
+    "message": "초"
+  },
+  "optAnalog": {
+    "message": "아날로그"
+  },
+  "segWorld": {
+    "message": "세계시계"
+  },
+  "segTimer": {
+    "message": "타이머"
+  },
+  "segPomodoro": {
+    "message": "뽀모도로"
+  },
+  "add": {
+    "message": "추가"
+  },
+  "worldEmpty": {
+    "message": "도시를 추가해 세계 시간을 확인하세요."
+  },
+  "unitHour": {
+    "message": "시"
+  },
+  "unitMin": {
+    "message": "분"
+  },
+  "unitSec": {
+    "message": "초"
+  },
+  "nMin": {
+    "message": "$1분"
+  },
+  "start": {
+    "message": "시작"
+  },
+  "running": {
+    "message": "실행 중"
+  },
+  "resume": {
+    "message": "계속"
+  },
+  "pause": {
+    "message": "일시정지"
+  },
+  "reset": {
+    "message": "초기화"
+  },
+  "skip": {
+    "message": "건너뛰기"
+  },
+  "resetSession": {
+    "message": "세션 초기화"
+  },
+  "phaseFocus": {
+    "message": "집중"
+  },
+  "phaseShort": {
+    "message": "짧은 휴식"
+  },
+  "phaseLong": {
+    "message": "긴 휴식"
+  },
+  "pomoCount": {
+    "message": "🍅 오늘 $1회"
+  },
+  "offsetSame": {
+    "message": "현지와 동일"
+  },
+  "offsetDiff": {
+    "message": "현지 $1시간"
+  },
+  "timerDoneTitle": {
+    "message": "⏲️ 타이머 종료"
+  },
+  "timerDoneMsg": {
+    "message": "타이머가 끝났습니다!"
+  },
+  "pomoTitle": {
+    "message": "🍅 뽀모도로"
+  },
+  "pomoBreakMsg": {
+    "message": "잠깐 휴식하세요 ☕"
+  },
+  "pomoLongBreakMsg": {
+    "message": "길게 쉬어가세요! 🎉"
+  },
+  "pomoFocusMsg": {
+    "message": "다시 집중할 시간입니다! 🍅"
+  },
+  "aboutTitle": {
+    "message": "정보"
+  },
+  "aboutBlog": {
+    "message": "개발자 블로그"
+  },
+  "aboutGithub": {
+    "message": "GitHub"
+  },
+  "aboutPrivacy": {
+    "message": "개인정보처리방침"
+  },
+  "aboutRate": {
+    "message": "별점 남기기"
+  },
+  "aboutMadeBy": {
+    "message": "Swyoon Labs 제작"
+  },
+  "close": {
+    "message": "닫기"
+  },
+  "city_seoul": {
+    "message": "서울"
+  },
+  "city_tokyo": {
+    "message": "도쿄"
+  },
+  "city_beijing": {
+    "message": "베이징"
+  },
+  "city_hongkong": {
+    "message": "홍콩"
+  },
+  "city_singapore": {
+    "message": "싱가포르"
+  },
+  "city_bangkok": {
+    "message": "방콕"
+  },
+  "city_delhi": {
+    "message": "델리"
+  },
+  "city_dubai": {
+    "message": "두바이"
+  },
+  "city_moscow": {
+    "message": "모스크바"
+  },
+  "city_london": {
+    "message": "런던"
+  },
+  "city_paris": {
+    "message": "파리"
+  },
+  "city_berlin": {
+    "message": "베를린"
+  },
+  "city_newyork": {
+    "message": "뉴욕"
+  },
+  "city_chicago": {
+    "message": "시카고"
+  },
+  "city_losangeles": {
+    "message": "로스앤젤레스"
+  },
+  "city_saopaulo": {
+    "message": "상파울루"
+  },
+  "city_sydney": {
+    "message": "시드니"
+  },
+  "city_auckland": {
+    "message": "오클랜드"
+  },
+  "city_honolulu": {
+    "message": "호놀룰루"
+  },
+  "city_utc": {
+    "message": "UTC"
+  }
+}

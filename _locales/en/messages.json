@@ -1,0 +1,185 @@
+{
+  "appName": {
+    "message": "Side Panel Clock"
+  },
+  "appDesc": {
+    "message": "Clock, world clock, timer and Pomodoro — always by your side in the panel."
+  },
+  "themeToggle": {
+    "message": "Toggle theme"
+  },
+  "opt24h": {
+    "message": "24-hour"
+  },
+  "optSeconds": {
+    "message": "Seconds"
+  },
+  "optAnalog": {
+    "message": "Analog"
+  },
+  "segWorld": {
+    "message": "World"
+  },
+  "segTimer": {
+    "message": "Timer"
+  },
+  "segPomodoro": {
+    "message": "Pomodoro"
+  },
+  "add": {
+    "message": "Add"
+  },
+  "worldEmpty": {
+    "message": "Add a city to see its local time."
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "unitMin": {
+    "message": "m"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "nMin": {
+    "message": "$1 min"
+  },
+  "start": {
+    "message": "Start"
+  },
+  "running": {
+    "message": "Running"
+  },
+  "resume": {
+    "message": "Resume"
+  },
+  "pause": {
+    "message": "Pause"
+  },
+  "reset": {
+    "message": "Reset"
+  },
+  "skip": {
+    "message": "Skip"
+  },
+  "resetSession": {
+    "message": "Reset sessions"
+  },
+  "phaseFocus": {
+    "message": "Focus"
+  },
+  "phaseShort": {
+    "message": "Short break"
+  },
+  "phaseLong": {
+    "message": "Long break"
+  },
+  "pomoCount": {
+    "message": "🍅 Today: $1"
+  },
+  "offsetSame": {
+    "message": "Same as local"
+  },
+  "offsetDiff": {
+    "message": "$1h vs local"
+  },
+  "timerDoneTitle": {
+    "message": "⏲️ Timer finished"
+  },
+  "timerDoneMsg": {
+    "message": "Time's up!"
+  },
+  "pomoTitle": {
+    "message": "🍅 Pomodoro"
+  },
+  "pomoBreakMsg": {
+    "message": "Take a short break ☕"
+  },
+  "pomoLongBreakMsg": {
+    "message": "Time for a long break! 🎉"
+  },
+  "pomoFocusMsg": {
+    "message": "Time to focus! 🍅"
+  },
+  "aboutTitle": {
+    "message": "About"
+  },
+  "aboutBlog": {
+    "message": "Developer Blog"
+  },
+  "aboutGithub": {
+    "message": "GitHub"
+  },
+  "aboutPrivacy": {
+    "message": "Privacy Policy"
+  },
+  "aboutRate": {
+    "message": "Rate this extension"
+  },
+  "aboutMadeBy": {
+    "message": "Made by Swyoon Labs"
+  },
+  "close": {
+    "message": "Close"
+  },
+  "city_seoul": {
+    "message": "Seoul"
+  },
+  "city_tokyo": {
+    "message": "Tokyo"
+  },
+  "city_beijing": {
+    "message": "Beijing"
+  },
+  "city_hongkong": {
+    "message": "Hong Kong"
+  },
+  "city_singapore": {
+    "message": "Singapore"
+  },
+  "city_bangkok": {
+    "message": "Bangkok"
+  },
+  "city_delhi": {
+    "message": "Delhi"
+  },
+  "city_dubai": {
+    "message": "Dubai"
+  },
+  "city_moscow": {
+    "message": "Moscow"
+  },
+  "city_london": {
+    "message": "London"
+  },
+  "city_paris": {
+    "message": "Paris"
+  },
+  "city_berlin": {
+    "message": "Berlin"
+  },
+  "city_newyork": {
+    "message": "New York"
+  },
+  "city_chicago": {
+    "message": "Chicago"
+  },
+  "city_losangeles": {
+    "message": "Los Angeles"
+  },
+  "city_saopaulo": {
+    "message": "São Paulo"
+  },
+  "city_sydney": {
+    "message": "Sydney"
+  },
+  "city_auckland": {
+    "message": "Auckland"
+  },
+  "city_honolulu": {
+    "message": "Honolulu"
+  },
+  "city_utc": {
+    "message": "UTC"
+  }
+}
