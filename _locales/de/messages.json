@@ -8,6 +8,15 @@
   "themeToggle": {
     "message": "Thema wechseln"
   },
+  "theme_light": {
+    "message": "Helles Design"
+  },
+  "theme_dark": {
+    "message": "Dunkles Design"
+  },
+  "theme_auto": {
+    "message": "Automatisch (nach Uhrzeit)"
+  },
   "opt24h": {
     "message": "24-Std"
   },
@@ -16,6 +25,21 @@
   },
   "optAnalog": {
     "message": "Analog"
+  },
+  "clockFace": {
+    "message": "Zifferblatt"
+  },
+  "face_classic": {
+    "message": "Klassisch"
+  },
+  "face_minimal": {
+    "message": "Minimal"
+  },
+  "face_roman": {
+    "message": "Römisch"
+  },
+  "face_arabic": {
+    "message": "Zahlen"
   },
   "segWorld": {
     "message": "Weltuhr"
@@ -82,6 +106,9 @@
   },
   "offsetDiff": {
     "message": "$1 Std vs lokal"
+  },
+  "offsetDiffMin": {
+    "message": "$1 Std $2 Min vs lokal"
   },
   "timerDoneTitle": {
     "message": "⏲️ Timer beendet"
@@ -181,5 +208,47 @@
   },
   "city_utc": {
     "message": "UTC"
+  },
+  "themeColor": {
+    "message": "Akzentfarbe"
+  },
+  "accent_indigo": {
+    "message": "Indigo"
+  },
+  "accent_ocean": {
+    "message": "Ozean"
+  },
+  "accent_teal": {
+    "message": "Türkis"
+  },
+  "accent_emerald": {
+    "message": "Smaragd"
+  },
+  "accent_violet": {
+    "message": "Violett"
+  },
+  "accent_rose": {
+    "message": "Rosé"
+  },
+  "accent_amber": {
+    "message": "Bernstein"
+  },
+  "accent_slate": {
+    "message": "Schiefer"
+  },
+  "pomoEvery": {
+    "message": "Lange Pause alle"
+  },
+  "unitTimes": {
+    "message": "×"
+  },
+  "pomoUntilLong": {
+    "message": "Lange Pause in $1"
+  },
+  "plannerTitle": {
+    "message": "Besprechungsplaner"
+  },
+  "plannerNow": {
+    "message": "Jetzt"
   }
 }

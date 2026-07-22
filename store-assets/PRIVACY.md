@@ -2,7 +2,7 @@
 
 **Extension Name:** Side Panel Clock
 **Developer:** Swyoon Labs
-_Last updated: 2026-07-17_
+_Last updated: 2026-07-21_
 
 ## 1. Overview
 
@@ -18,7 +18,7 @@ Side Panel Clock does not collect personal information from users.
 
 The extension may store the following data **locally in the user's browser**:
 
-- Display preferences (theme, 12/24-hour, seconds, analog on/off)
+- Display preferences (theme mode, accent color, clock face, 12/24-hour, seconds, analog on/off)
 - The list of world-clock cities you add
 - Timer and Pomodoro state and settings (durations, session count)
 

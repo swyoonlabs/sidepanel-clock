@@ -8,6 +8,15 @@
   "themeToggle": {
     "message": "Toggle theme"
   },
+  "theme_light": {
+    "message": "Light theme"
+  },
+  "theme_dark": {
+    "message": "Dark theme"
+  },
+  "theme_auto": {
+    "message": "Auto (by time)"
+  },
   "opt24h": {
     "message": "24-hour"
   },
@@ -16,6 +25,21 @@
   },
   "optAnalog": {
     "message": "Analog"
+  },
+  "clockFace": {
+    "message": "Clock face"
+  },
+  "face_classic": {
+    "message": "Classic"
+  },
+  "face_minimal": {
+    "message": "Minimal"
+  },
+  "face_roman": {
+    "message": "Roman"
+  },
+  "face_arabic": {
+    "message": "Numbers"
   },
   "segWorld": {
     "message": "World"
@@ -82,6 +106,9 @@
   },
   "offsetDiff": {
     "message": "$1h vs local"
+  },
+  "offsetDiffMin": {
+    "message": "$1h $2m vs local"
   },
   "timerDoneTitle": {
     "message": "⏲️ Timer finished"
@@ -181,5 +208,47 @@
   },
   "city_utc": {
     "message": "UTC"
+  },
+  "themeColor": {
+    "message": "Theme color"
+  },
+  "accent_indigo": {
+    "message": "Indigo"
+  },
+  "accent_ocean": {
+    "message": "Ocean"
+  },
+  "accent_teal": {
+    "message": "Teal"
+  },
+  "accent_emerald": {
+    "message": "Emerald"
+  },
+  "accent_violet": {
+    "message": "Violet"
+  },
+  "accent_rose": {
+    "message": "Rose"
+  },
+  "accent_amber": {
+    "message": "Amber"
+  },
+  "accent_slate": {
+    "message": "Slate"
+  },
+  "pomoEvery": {
+    "message": "Long every"
+  },
+  "unitTimes": {
+    "message": "×"
+  },
+  "pomoUntilLong": {
+    "message": "Long break in $1"
+  },
+  "plannerTitle": {
+    "message": "Meeting planner"
+  },
+  "plannerNow": {
+    "message": "Now"
   }
 }

@@ -18,7 +18,9 @@
       <button class="opt" id="opt24h" data-on="false" data-i18n="opt24h">24h</button>
       <button class="opt" id="optSeconds" data-on="true" data-i18n="optSeconds">Seconds</button>
       <button class="opt" id="optAnalog" data-on="true" data-i18n="optAnalog">Analog</button>
+      <button class="opt" id="optFace" data-i18n-title="clockFace">Classic</button>
     </div>
+    <div class="hero-swatches" id="swatches" role="group" data-i18n-label="themeColor"></div>
   </section>
 
   <!-- 세그먼트 전환 -->
@@ -35,6 +37,19 @@
       <div class="add-row">
         <select id="tzSelect"></select>
         <button id="tzAdd" class="btn primary" data-i18n="add">Add</button>
+      </div>
+      <div class="planner" id="planner">
+        <div class="planner-head">
+          <span class="planner-title" data-i18n="plannerTitle">Meeting planner</span>
+          <button id="plannerNow" class="planner-now" data-i18n="plannerNow">Now</button>
+        </div>
+        <div class="planner-time">
+          <span class="pt-icon">🗓️</span>
+          <span class="pt-day" id="plannerDay"></span>
+          <span class="pt-clock" id="plannerClock">—</span>
+        </div>
+        <input type="range" id="plannerSlider" class="planner-slider" min="0" max="1425" step="15" value="0" data-i18n-label="plannerTitle" />
+        <div class="planner-ticks" aria-hidden="true"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
       </div>
       <ul id="worldList" class="world-list"></ul>
       <p id="worldEmpty" class="empty" data-i18n="worldEmpty">Add a city to see its local time.</p>
@@ -87,6 +102,7 @@
           <div class="pomo-phase" id="pomoPhase">Focus</div>
           <div class="ring-time" id="pomoDisplay">25:00</div>
           <div class="pomo-count" id="pomoCount">🍅 0</div>
+          <div class="pomo-next" id="pomoNext"></div>
         </div>
       </div>
       <div class="btn-row">
@@ -98,6 +114,7 @@
         <label><span data-i18n="phaseFocus">Focus</span> <input type="number" id="pomoFocus" min="1" max="90" value="25" /><span data-i18n="unitMin">m</span></label>
         <label><span data-i18n="phaseShort">Break</span> <input type="number" id="pomoShort" min="1" max="60" value="5" /><span data-i18n="unitMin">m</span></label>
         <label><span data-i18n="phaseLong">Long</span> <input type="number" id="pomoLong" min="1" max="60" value="15" /><span data-i18n="unitMin">m</span></label>
+        <label><span data-i18n="pomoEvery">Long every</span> <input type="number" id="pomoEvery" min="2" max="12" value="4" /><span data-i18n="unitTimes">×</span></label>
       </div>
       <button id="pomoReset" class="btn full-reset" data-i18n="resetSession">Reset sessions</button>
     </section>

@@ -1,0 +1,157 @@
+<!-- Blogspot: paste into "HTML view". Images load from GitHub (raw). Part 2 of 4. -->
+<div style="max-width:720px;margin:0 auto;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.75;color:#1e293b;">
+
+  <p style="text-align:center;margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:1.5px;color:#4f46e5;">DEV DIARY · PART 2 OF 4</p>
+
+  <h1 style="text-align:center;font-size:30px;line-height:1.3;margin:0 0 20px;color:#0f172a;">
+    A world clock without the time-zone headaches (and yes, Daylight Saving too)
+  </h1>
+
+  <p style="text-align:center;margin:0 0 24px;">
+    <img src="https://raw.githubusercontent.com/swyoonlabs/sidepanel-clock/main/screenshots/spc-2-world.png"
+         alt="World clock listing cities with local time and offset" style="width:100%;border-radius:16px;box-shadow:0 10px 30px rgba(30,41,59,.15);">
+  </p>
+
+  <p style="font-size:18px;">
+    A world clock sounds trivial until you remember <b>Daylight Saving Time</b>. New York is UTC−5 in winter
+    and UTC−4 in summer. Sydney does the opposite, because the seasons are flipped. India sits on a
+    <i>half-hour</i> offset; Nepal on a <i>45-minute</i> one. The moment you try to store fixed offsets, you've
+    signed up to maintain the world's DST rules forever. In this post I'll show how I avoided all of that by
+    leaning on one browser API: <code>Intl</code>.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">The key idea: names, not numbers</h2>
+  <p>
+    The single most important decision is to never store an offset like <code>UTC+9</code>. Instead, store an
+    <b>IANA time-zone name</b> such as <code>Asia/Seoul</code> or <code>America/New_York</code>. These names map
+    to the full history and future of a region's rules — including when DST starts and stops — inside the
+    browser's built-in time-zone database.
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">const TIMEZONES = [
+  ["seoul",   "Asia/Seoul"],
+  ["tokyo",   "Asia/Tokyo"],
+  ["london",  "Europe/London"],
+  ["newyork", "America/New_York"],
+  ["sydney",  "Australia/Sydney"],
+  // …20 cities total
+];</pre>
+
+  <p>
+    To render the current time for a zone, I hand that name straight to <code>Intl.DateTimeFormat</code>:
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">const timeStr = new Intl.DateTimeFormat(uiLang, {
+  timeZone: "America/New_York",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+}).format(new Date());</pre>
+
+  <div style="background:#eef2ff;border-left:4px solid #4f46e5;border-radius:0 10px 10px 0;padding:14px 18px;margin:22px 0;">
+    💡 <b>There is no Daylight Saving code in the app.</b> Because the zone is named, the browser decides whether
+    DST applies for <i>today's</i> date and converts accordingly. If a country changes its rules, a browser
+    update fixes it — not an app update.
+  </div>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">The offset label: "−3h 30m vs local"</h2>
+  <p>
+    Showing the time is easy. The genuinely fiddly part is the little label that says how far ahead or behind
+    the city is relative to <i>you</i>. My first version parsed a localized date string and rounded to whole
+    hours — which quietly broke for India (+5:30) and Nepal (+5:45). The fix was to compute the offset in
+    <b>minutes</b>, using <code>formatToParts</code> to read a zone's wall-clock time reliably:
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">// How many minutes is this zone ahead of UTC right now?
+// (DST- and half-hour-offset aware)
+function zoneOffsetMinutes(zone, now) {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: zone, hour12: false,
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit",
+    })
+      .formatToParts(now)
+      .map((p) =&gt; [p.type, p.value])
+  );
+  const hour = parts.hour === "24" ? 0 : +parts.hour; // midnight quirk
+  const asUTC = Date.UTC(
+    +parts.year, +parts.month - 1, +parts.day,
+    hour, +parts.minute, +parts.second
+  );
+  return Math.round((asUTC - now.getTime()) / 60000);
+}</pre>
+
+  <p>
+    The trick: format the instant <i>as if</i> it were in the target zone, then read those components back as
+    though they were UTC. The gap between that and the real timestamp is the zone's offset — in minutes, so
+    half- and quarter-hour zones survive. Note the <code>"24"</code> guard: some environments format midnight
+    as hour 24 instead of 0.
+  </p>
+  <p>
+    The difference from your own zone is then just a subtraction. JavaScript's
+    <code>Date.getTimezoneOffset()</code> returns minutes to <i>add</i> to reach UTC (so it's negative east of
+    UTC), which makes the local part a one-liner:
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">function localOffsetLabel(zone, now) {
+  const diff = zoneOffsetMinutes(zone, now) + now.getTimezoneOffset();
+  if (diff === 0) return "Same as local";
+  const sign = diff &gt; 0 ? "+" : "-";
+  const abs = Math.abs(diff);
+  const h = Math.floor(abs / 60), m = abs % 60;
+  return m ? `${sign}${h}h ${m}m vs local` : `${sign}${h}h vs local`;
+}</pre>
+
+  <p>Spot-checking a few cases with local time set to Seoul (UTC+9) shows why minutes matter:</p>
+  <ul>
+    <li><b>Delhi</b> (+5:30) → <code>−3h 30m</code> in both summer and winter (India has no DST).</li>
+    <li><b>New York</b> → <code>−13h</code> in summer (EDT), <code>−14h</code> in winter (EST). DST, handled for free.</li>
+    <li><b>Sydney</b> → <code>+1h</code> in the northern summer, <code>+2h</code> in winter — the southern-hemisphere flip, also for free.</li>
+  </ul>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">A tiny touch: day or night?</h2>
+  <p>
+    Because I already had reliable per-zone hours, I added a small badge showing whether it's dawn, day, dusk,
+    or night in each city — surprisingly useful for "is it a reasonable hour to message them?"
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">function dayNightGlyph(zone, now) {
+  const h = zoneHour(zone, now); // built on the same Intl call
+  if (h &gt;= 5 &amp;&amp; h &lt; 8)  return "🌅"; // dawn
+  if (h &gt;= 8 &amp;&amp; h &lt; 18) return "☀️"; // day
+  if (h &gt;= 18 &amp;&amp; h &lt; 20) return "🌆"; // dusk
+  return "🌙";                           // night
+}</pre>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Bonus: city names in the user's language</h2>
+  <p>
+    The same "let the platform do it" philosophy applies to city names. Rather than translate them myself, each
+    city has a message key, and the browser's i18n system returns <b>Seoul / 서울 / ソウル / 首尔</b> based on the
+    UI language. The list even re-sorts alphabetically <i>in that language</i>.
+  </p>
+
+  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px 24px;margin:28px 0;">
+    <p style="margin:0 0 10px;font-weight:700;color:#0f172a;">Takeaways</p>
+    <ul style="margin:0;padding-left:20px;">
+      <li>Store <b>IANA zone names</b>, never fixed offsets — DST comes for free.</li>
+      <li>Compute offsets in <b>minutes</b> via <code>formatToParts</code> to support +5:30 / +5:45 zones.</li>
+      <li>Guard the <b>hour "24"</b> midnight edge case.</li>
+      <li>Lean on <code>Intl</code> for formatting <i>and</i> localized names — less code, fewer bugs.</li>
+    </ul>
+  </div>
+
+  <p>
+    Next up in <b>Part 3</b>: leaving text behind and drawing the analog clock face on an HTML Canvas — with
+    four switchable designs generated from a single reusable function.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Try it</h2>
+  <ul>
+    <li>🛒 <a href="https://chromewebstore.google.com/detail/side-panel-clock/mmadibebkikbnpeanlhhaeanmnhdinie">Chrome Web Store</a></li>
+    <li>🔗 <a href="https://github.com/swyoonlabs/sidepanel-clock">Source on GitHub</a></li>
+  </ul>
+
+  <p style="color:#64748b;font-size:14px;margin-top:32px;">Dev Diary · Part 2 of 4 · Swyoon Labs</p>
+
+</div>

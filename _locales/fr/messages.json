@@ -8,6 +8,15 @@
   "themeToggle": {
     "message": "Changer de thème"
   },
+  "theme_light": {
+    "message": "Thème clair"
+  },
+  "theme_dark": {
+    "message": "Thème sombre"
+  },
+  "theme_auto": {
+    "message": "Auto (selon l'heure)"
+  },
   "opt24h": {
     "message": "24 h"
   },
@@ -16,6 +25,21 @@
   },
   "optAnalog": {
     "message": "Analogique"
+  },
+  "clockFace": {
+    "message": "Cadran"
+  },
+  "face_classic": {
+    "message": "Classique"
+  },
+  "face_minimal": {
+    "message": "Minimaliste"
+  },
+  "face_roman": {
+    "message": "Romain"
+  },
+  "face_arabic": {
+    "message": "Chiffres"
   },
   "segWorld": {
     "message": "Monde"
@@ -82,6 +106,9 @@
   },
   "offsetDiff": {
     "message": "$1 h vs ici"
+  },
+  "offsetDiffMin": {
+    "message": "$1 h $2 min vs ici"
   },
   "timerDoneTitle": {
     "message": "⏲️ Minuteur terminé"
@@ -181,5 +208,47 @@
   },
   "city_utc": {
     "message": "UTC"
+  },
+  "themeColor": {
+    "message": "Couleur du thème"
+  },
+  "accent_indigo": {
+    "message": "Indigo"
+  },
+  "accent_ocean": {
+    "message": "Océan"
+  },
+  "accent_teal": {
+    "message": "Turquoise"
+  },
+  "accent_emerald": {
+    "message": "Émeraude"
+  },
+  "accent_violet": {
+    "message": "Violet"
+  },
+  "accent_rose": {
+    "message": "Rose"
+  },
+  "accent_amber": {
+    "message": "Ambre"
+  },
+  "accent_slate": {
+    "message": "Ardoise"
+  },
+  "pomoEvery": {
+    "message": "Pause longue tous les"
+  },
+  "unitTimes": {
+    "message": "×"
+  },
+  "pomoUntilLong": {
+    "message": "Pause longue dans $1"
+  },
+  "plannerTitle": {
+    "message": "Planificateur de réunion"
+  },
+  "plannerNow": {
+    "message": "Maintenant"
   }
 }

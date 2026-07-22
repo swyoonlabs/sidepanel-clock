@@ -1,0 +1,131 @@
+<!-- Blogspot: paste into "HTML view". Images load from GitHub (raw). Part 1 of 4. -->
+<div style="max-width:720px;margin:0 auto;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.75;color:#1e293b;">
+
+  <p style="text-align:center;margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:1.5px;color:#4f46e5;">DEV DIARY · PART 1 OF 4</p>
+
+  <h1 style="text-align:center;font-size:30px;line-height:1.3;margin:0 0 20px;color:#0f172a;">
+    Why I built a clock that lives in the browser sidebar
+  </h1>
+
+  <p style="text-align:center;margin:0 0 24px;">
+    <img src="https://raw.githubusercontent.com/swyoonlabs/sidepanel-clock/main/screenshots/spc-1-hero.png"
+         alt="Side Panel Clock in the Chrome side panel" style="width:100%;border-radius:16px;box-shadow:0 10px 30px rgba(30,41,59,.15);">
+  </p>
+
+  <p style="font-size:18px;">
+    This is the first post in a four-part series about building <b>Side Panel Clock</b>, a small
+    Chrome extension I made to keep the time — local, worldwide, and focus time — one glance away.
+    Before any code, I want to explain the itch that started it, and why the browser's <b>Side Panel</b>
+    turned out to be exactly the right home for a clock.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">The small annoyance that wouldn't go away</h2>
+  <p>
+    I spend most of my working day inside the browser. And all day long I kept doing the same tiny things:
+    glancing at the clock, working out what time it was for a teammate three time zones away, and starting a
+    quick timer so a task wouldn't quietly eat an hour.
+  </p>
+  <p>
+    None of these are hard. The problem is that each one pulled me <i>away</i> from what I was doing. The OS
+    clock meant looking off-screen. A world-clock site meant a new tab. A timer meant yet another tab or a
+    phone app that I'd forget to check. Individually trivial; together, a steady drip of small interruptions.
+  </p>
+  <p>
+    I wanted one place, always visible, that answered three questions without a context switch:
+    <b>what time is it here, what time is it there, and how much time do I have left?</b>
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Why not a popup, a new tab, or an app?</h2>
+  <p>
+    A browser-action <b>popup</b> was the obvious first idea, but popups close the moment you click anywhere
+    else — useless for something you want to keep watching. A <b>new-tab page</b> only helps when you open a
+    new tab, which is the opposite of "always visible." A separate <b>desktop app</b> or phone would solve the
+    persistence problem but reintroduce the context switch I was trying to kill.
+  </p>
+  <p>
+    What I actually wanted was a strip of screen that stays put next to my content. Chrome shipped exactly that:
+    the <b>Side Panel</b>.
+  </p>
+
+  <div style="background:#eef2ff;border-left:4px solid #4f46e5;border-radius:0 10px 10px 0;padding:14px 18px;margin:22px 0;">
+    💡 The Side Panel is a persistent pane docked to the side of the browser window. Unlike a popup, it
+    <b>stays open while you browse</b> and rides along across tabs — perfect for a glanceable clock.
+  </div>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Claiming the panel: Manifest V3</h2>
+  <p>
+    Putting an extension into the Side Panel is refreshingly little configuration. You declare the
+    <code>sidePanel</code> permission and point at an HTML page:
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">{
+  "manifest_version": 3,
+  "name": "Side Panel Clock",
+  "permissions": ["sidePanel", "storage", "alarms", "notifications"],
+  "background": { "service_worker": "background.js" },
+  "side_panel": { "default_path": "sidepanel.html" }
+}</pre>
+
+  <p>
+    By default the panel opens from Chrome's own puzzle-piece menu. I wanted the toolbar icon to toggle it
+    directly, which is a one-liner in the background service worker:
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">chrome.runtime.onInstalled.addListener(() =&gt; {
+  chrome.sidePanel
+    .setPanelBehavior({ openPanelOnActionClick: true })
+    .catch((err) =&gt; console.error(err));
+});
+
+// Run again at the top level so it still works
+// when the service worker restarts.
+chrome.sidePanel
+  .setPanelBehavior({ openPanelOnActionClick: true })
+  .catch((err) =&gt; console.error(err));</pre>
+
+  <p>
+    That second call outside the listener matters. MV3 service workers are <b>event-driven and can be shut
+    down at any time</b>; setting the behavior at the top level ensures it's re-applied whenever the worker
+    spins back up. That "the worker is not always alive" reality shaped a lot of later decisions — especially
+    for the timer and Pomodoro, which I'll cover in this series.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">One principle: one glance, no friction</h2>
+  <p>
+    With a home chosen, I set one rule for the whole project: <b>everything answerable at a glance, nothing
+    that demands a context switch.</b> Concretely, that meant:
+  </p>
+  <ul>
+    <li>A large clock <b>pinned to the top</b> of the panel, visible no matter which sub-view you're in.</li>
+    <li>A world clock where you <b>never do time-zone math</b> — it shows the offset for you.</li>
+    <li>A timer and Pomodoro that <b>keep running even when the panel is closed</b>, and notify you.</li>
+    <li><b>No account, no sign-in, no tracking.</b> Settings live in local storage; nothing leaves your machine.</li>
+  </ul>
+  <p>
+    That last point wasn't only an ethical choice, it was a simplicity choice. With no server and no analytics,
+    there's no login flow, no privacy console, and no backend to run. The extension is just HTML, CSS, and a
+    few hundred lines of vanilla JavaScript — no framework, no build step. For a tool this size, that keeps it
+    fast to load and easy to reason about.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">What's coming in this series</h2>
+  <p>Over the next three posts I'll go through the parts I found most interesting to build:</p>
+  <ol>
+    <li><b>Part 2 — World clock &amp; Daylight Saving Time</b>, done right with the <code>Intl</code> API (including 30- and 45-minute offsets).</li>
+    <li><b>Part 3 — Drawing analog clock faces</b> on HTML Canvas, with four switchable designs from one reusable function.</li>
+    <li><b>Part 4 — Theming</b> with CSS custom properties: eight accent colors plus an automatic light/dark mode that follows the time of day.</li>
+  </ol>
+  <p>
+    If you just want the extension, the links are below. Otherwise, see you in Part 2, where a single browser
+    API quietly solves the whole "what time is it over there — and is it summer time?" problem.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Try it</h2>
+  <ul>
+    <li>🛒 <a href="https://chromewebstore.google.com/detail/side-panel-clock/mmadibebkikbnpeanlhhaeanmnhdinie">Chrome Web Store</a></li>
+    <li>🔗 <a href="https://github.com/swyoonlabs/sidepanel-clock">Source on GitHub</a></li>
+  </ul>
+
+  <p style="color:#64748b;font-size:14px;margin-top:32px;">Dev Diary · Part 1 of 4 · Swyoon Labs</p>
+
+</div>

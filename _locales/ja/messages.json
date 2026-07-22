@@ -8,6 +8,15 @@
   "themeToggle": {
     "message": "テーマ切替"
   },
+  "theme_light": {
+    "message": "ライトテーマ"
+  },
+  "theme_dark": {
+    "message": "ダークテーマ"
+  },
+  "theme_auto": {
+    "message": "自動（時刻に応じて）"
+  },
   "opt24h": {
     "message": "24時間"
   },
@@ -16,6 +25,21 @@
   },
   "optAnalog": {
     "message": "アナログ"
+  },
+  "clockFace": {
+    "message": "時計デザイン"
+  },
+  "face_classic": {
+    "message": "クラシック"
+  },
+  "face_minimal": {
+    "message": "ミニマル"
+  },
+  "face_roman": {
+    "message": "ローマ数字"
+  },
+  "face_arabic": {
+    "message": "数字"
   },
   "segWorld": {
     "message": "世界時計"
@@ -82,6 +106,9 @@
   },
   "offsetDiff": {
     "message": "現地 $1時間"
+  },
+  "offsetDiffMin": {
+    "message": "現地 $1時間$2分"
   },
   "timerDoneTitle": {
     "message": "⏲️ タイマー終了"
@@ -181,5 +208,47 @@
   },
   "city_utc": {
     "message": "UTC"
+  },
+  "themeColor": {
+    "message": "テーマカラー"
+  },
+  "accent_indigo": {
+    "message": "インディゴ"
+  },
+  "accent_ocean": {
+    "message": "オーシャン"
+  },
+  "accent_teal": {
+    "message": "ティール"
+  },
+  "accent_emerald": {
+    "message": "エメラルド"
+  },
+  "accent_violet": {
+    "message": "バイオレット"
+  },
+  "accent_rose": {
+    "message": "ローズ"
+  },
+  "accent_amber": {
+    "message": "アンバー"
+  },
+  "accent_slate": {
+    "message": "スレート"
+  },
+  "pomoEvery": {
+    "message": "長い休憩の周期"
+  },
+  "unitTimes": {
+    "message": "回"
+  },
+  "pomoUntilLong": {
+    "message": "長い休憩まであと$1回"
+  },
+  "plannerTitle": {
+    "message": "会議プランナー"
+  },
+  "plannerNow": {
+    "message": "現在"
   }
 }

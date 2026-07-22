@@ -8,6 +8,15 @@
   "themeToggle": {
     "message": "테마 전환"
   },
+  "theme_light": {
+    "message": "라이트 테마"
+  },
+  "theme_dark": {
+    "message": "다크 테마"
+  },
+  "theme_auto": {
+    "message": "자동 (시간대)"
+  },
   "opt24h": {
     "message": "24시간"
   },
@@ -16,6 +25,21 @@
   },
   "optAnalog": {
     "message": "아날로그"
+  },
+  "clockFace": {
+    "message": "시계 모양"
+  },
+  "face_classic": {
+    "message": "클래식"
+  },
+  "face_minimal": {
+    "message": "미니멀"
+  },
+  "face_roman": {
+    "message": "로마 숫자"
+  },
+  "face_arabic": {
+    "message": "숫자"
   },
   "segWorld": {
     "message": "세계시계"
@@ -82,6 +106,9 @@
   },
   "offsetDiff": {
     "message": "현지 $1시간"
+  },
+  "offsetDiffMin": {
+    "message": "현지 $1시간 $2분"
   },
   "timerDoneTitle": {
     "message": "⏲️ 타이머 종료"
@@ -181,5 +208,47 @@
   },
   "city_utc": {
     "message": "UTC"
+  },
+  "themeColor": {
+    "message": "테마 색상"
+  },
+  "accent_indigo": {
+    "message": "인디고"
+  },
+  "accent_ocean": {
+    "message": "오션"
+  },
+  "accent_teal": {
+    "message": "청록"
+  },
+  "accent_emerald": {
+    "message": "에메랄드"
+  },
+  "accent_violet": {
+    "message": "바이올렛"
+  },
+  "accent_rose": {
+    "message": "로즈"
+  },
+  "accent_amber": {
+    "message": "앰버"
+  },
+  "accent_slate": {
+    "message": "슬레이트"
+  },
+  "pomoEvery": {
+    "message": "긴 휴식 주기"
+  },
+  "unitTimes": {
+    "message": "회"
+  },
+  "pomoUntilLong": {
+    "message": "긴 휴식까지 $1회"
+  },
+  "plannerTitle": {
+    "message": "미팅 플래너"
+  },
+  "plannerNow": {
+    "message": "현재"
   }
 }

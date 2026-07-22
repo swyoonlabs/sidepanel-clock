@@ -1,0 +1,182 @@
+<!-- Blogspot: paste into "HTML view". Images load from GitHub (raw). Part 3 of 4. -->
+<div style="max-width:720px;margin:0 auto;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.75;color:#1e293b;">
+
+  <p style="text-align:center;margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:1.5px;color:#4f46e5;">DEV DIARY · PART 3 OF 4</p>
+
+  <h1 style="text-align:center;font-size:30px;line-height:1.3;margin:0 0 20px;color:#0f172a;">
+    Drawing four analog clock faces from one Canvas function
+  </h1>
+
+  <p style="font-size:18px;">
+    A digital readout tells you the time; an analog face gives it a <i>shape</i>. I wanted Side Panel Clock to
+    have a proper analog clock — and then, because it was fun, four different faces you can switch between:
+    classic ticks, minimal dots, Roman numerals, and plain numbers. This post walks through drawing a clock on
+    an HTML <code>&lt;canvas&gt;</code>, and how to get four looks out of a single reusable function.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">The canvas coordinate trick</h2>
+  <p>
+    Canvas puts <code>(0, 0)</code> in the top-left, but a clock is naturally described from its <b>center</b>.
+    So the very first thing I do is translate the origin to the middle. After that, every tick and hand is just
+    "an angle and a length from the center," which is exactly how you think about a clock.
+  </p>
+  <p>
+    I also pass in a <code>size</code> and derive a <code>scale</code> from it (my geometry was designed against
+    a 300px face). That single factor lets the <i>same</i> code render a crisp 188px face in the panel and
+    scale just as cleanly to any larger size, with no separate geometry to maintain.
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">function renderClockFace(ctx, size, now, opts) {
+  const r = size / 2;
+  const scale = size / 300; // geometry designed at 300px
+  const { faceBg, border, tick, dim, accent, seconds } = opts;
+  const face = opts.face;          // "classic" | "minimal" | "roman" | "arabic"
+  const minimal = face === "minimal";
+
+  ctx.save();
+  ctx.translate(r, r);             // origin → center
+
+  // the dial
+  ctx.beginPath();
+  ctx.arc(0, 0, r - 6 * scale, 0, Math.PI * 2);
+  ctx.fillStyle = faceBg;
+  ctx.fill();
+  ctx.lineWidth = (minimal ? 2 : 4) * scale;
+  ctx.strokeStyle = border;
+  ctx.stroke();</pre>
+
+  <div style="background:#eef2ff;border-left:4px solid #4f46e5;border-radius:0 10px 10px 0;padding:14px 18px;margin:22px 0;">
+    💡 Notice the function takes <b>colors as options</b> rather than reading them itself. That decoupling
+    keeps the drawing independent of the theme — the caller passes whichever palette it needs, so one function
+    serves both light and dark without any change.
+  </div>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">One loop, four faces</h2>
+  <p>
+    The markers around the dial are the only thing that really differ between faces. A single
+    <code>if/else</code> branch handles all four:
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">if (face === "classic") {
+  // 60 ticks; every 5th is longer and bolder
+  for (let i = 0; i &lt; 60; i++) {
+    const ang = (i * Math.PI) / 30;
+    const isHour = i % 5 === 0;
+    const len = (isHour ? 12 : 5) * scale;
+    const outer = r - 14 * scale;
+    ctx.beginPath();
+    ctx.lineWidth = (isHour ? 3 : 1) * scale;
+    ctx.strokeStyle = isHour ? tick : dim;
+    ctx.moveTo((outer - len) * Math.sin(ang), -(outer - len) * Math.cos(ang));
+    ctx.lineTo(outer * Math.sin(ang), -outer * Math.cos(ang));
+    ctx.stroke();
+  }
+} else if (minimal) {
+  // 12 dots; 12/3/6/9 emphasized
+  const rad = r - 18 * scale;
+  for (let i = 0; i &lt; 12; i++) {
+    const ang = (i * Math.PI) / 6;
+    const big = i % 3 === 0;
+    ctx.beginPath();
+    ctx.arc(Math.sin(ang) * rad, -Math.cos(ang) * rad, (big ? 3.5 : 2) * scale, 0, Math.PI * 2);
+    ctx.fillStyle = big ? tick : dim;
+    ctx.fill();
+  }
+} else {
+  // roman / arabic numerals
+  const serif = face === "roman";
+  const rad = r - (serif ? 30 : 28) * scale;
+  ctx.fillStyle = tick;
+  ctx.font = `600 ${Math.round(r * (serif ? 0.17 : 0.2))}px ` +
+    (serif ? "Georgia, serif" : "system-ui, sans-serif");
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (let i = 0; i &lt; 12; i++) {
+    const ang = (i * Math.PI) / 6;
+    const label = serif ? ROMAN[i] : (i === 0 ? "12" : String(i));
+    ctx.fillText(label, Math.sin(ang) * rad, -Math.cos(ang) * rad);
+  }
+}</pre>
+
+  <p>
+    The angle math is the same every time: <code>sin</code> for the x-component, <code>-cos</code> for y (negative
+    because canvas y grows downward, but 12 o'clock is <i>up</i>). Position <code>i = 0</code> lands at the top,
+    which is why the Roman array starts at <code>"XII"</code>.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Hands that sweep smoothly</h2>
+  <p>
+    For the hands, the important detail is <b>fractional time</b>. If the hour hand only moved on the hour it
+    would look broken at 6:30. So each hand's angle includes the smaller unit — and the second hand even folds
+    in milliseconds for a smooth sweep:
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">const h = now.getHours() % 12, m = now.getMinutes(),
+      s = now.getSeconds(),   ms = now.getMilliseconds();
+
+const secAngle  = ((s + ms / 1000) * Math.PI) / 30;
+const minAngle  = ((m + s / 60)    * Math.PI) / 30;
+const hourAngle = ((h + m / 60)    * Math.PI) / 6;
+
+const hand = (angle, length, width, color) =&gt; {
+  ctx.beginPath();
+  ctx.lineCap = "round";
+  ctx.lineWidth = width;
+  ctx.strokeStyle = color;
+  // extend slightly past center for a balanced look
+  ctx.moveTo(-Math.sin(angle) * (length * 0.18), Math.cos(angle) * (length * 0.18));
+  ctx.lineTo(Math.sin(angle) * length, -Math.cos(angle) * length);
+  ctx.stroke();
+};
+
+hand(hourAngle, r * 0.5,  (minimal ? 4 : 6)   * scale, tick);
+hand(minAngle,  r * 0.72, (minimal ? 2.5 : 4) * scale, tick);
+if (seconds) hand(secAngle, r * 0.78, (minimal ? 1.5 : 2) * scale, accent);</pre>
+
+  <p>
+    The second hand is the one place the theme's <b>accent color</b> shows up on the dial, so it reads as a small
+    pop against the neutral hands.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">The animation loop</h2>
+  <p>
+    The live clock just clears the canvas and re-draws inside <code>requestAnimationFrame</code>. Because
+    <code>renderClockFace</code> doesn't clear anything itself, the caller stays in control of the background —
+    a small separation that keeps the render function reusable at any size.
+  </p>
+
+  <pre style="background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6;font-family:ui-monospace,'SF Mono',Menlo,monospace;">function drawAnalog(now) {
+  actx.clearRect(0, 0, analog.width, analog.width);
+  renderClockFace(actx, analog.width, now, faceOpts());
+}
+// …called every frame:
+function tick() {
+  drawAnalog(new Date());
+  requestAnimationFrame(tick);
+}</pre>
+
+  <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px 24px;margin:28px 0;">
+    <p style="margin:0 0 10px;font-weight:700;color:#0f172a;">Takeaways</p>
+    <ul style="margin:0;padding-left:20px;">
+      <li><b>Translate to center</b> first; describe everything as angle + length.</li>
+      <li>Derive a <b>scale factor</b> so one function renders at any size.</li>
+      <li>Pass <b>colors as options</b> — decouple drawing from theme.</li>
+      <li>Use <b>fractional time</b> so hands move continuously.</li>
+      <li>Let the <b>caller clear</b> the canvas, so the same function works for live UI and image export.</li>
+    </ul>
+  </div>
+
+  <p>
+    In <b>Part 4</b> I'll wire up the colors those options carry: eight accent palettes and an automatic
+    light/dark mode, all driven by CSS custom properties.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Try it</h2>
+  <ul>
+    <li>🛒 <a href="https://chromewebstore.google.com/detail/side-panel-clock/mmadibebkikbnpeanlhhaeanmnhdinie">Chrome Web Store</a></li>
+    <li>🔗 <a href="https://github.com/swyoonlabs/sidepanel-clock">Source on GitHub</a></li>
+  </ul>
+
+  <p style="color:#64748b;font-size:14px;margin-top:32px;">Dev Diary · Part 3 of 4 · Swyoon Labs</p>
+
+</div>
