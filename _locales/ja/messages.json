@@ -250,5 +250,23 @@
   },
   "plannerNow": {
     "message": "現在"
+  },
+  "expandTitle": {
+    "message": "全画面時計"
+  },
+  "exitFullTitle": {
+    "message": "パネルに戻る"
+  },
+  "accent_sky": {
+    "message": "スカイ"
+  },
+  "accent_mint": {
+    "message": "ミント"
+  },
+  "accent_peach": {
+    "message": "ピーチ"
+  },
+  "accent_lavender": {
+    "message": "ラベンダー"
   }
 }

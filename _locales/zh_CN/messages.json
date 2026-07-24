@@ -250,5 +250,23 @@
   },
   "plannerNow": {
     "message": "现在"
+  },
+  "expandTitle": {
+    "message": "全屏时钟"
+  },
+  "exitFullTitle": {
+    "message": "返回侧栏"
+  },
+  "accent_sky": {
+    "message": "天蓝"
+  },
+  "accent_mint": {
+    "message": "薄荷"
+  },
+  "accent_peach": {
+    "message": "蜜桃"
+  },
+  "accent_lavender": {
+    "message": "薰衣草"
   }
 }

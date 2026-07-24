@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0] - 2026-07-24
+
+### Added
+- **Fullscreen clock** — a ⛶ button expands the clock into a full browser tab with a large, centered clock. Opening it closes the side panel; pressing the button (✕) returns you to the panel. While in fullscreen, click the time to open the developer blog in a new window.
+- **Light theme colors** — 4 new pastel accents (Sky, Mint, Peach, Lavender). On these light backgrounds, the hero text and controls automatically switch to dark for readability; in dark mode they use a deeper tone with light text.
+
 ## [1.2.0] - 2026-07-22
 
 ### Added

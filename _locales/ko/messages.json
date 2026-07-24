@@ -250,5 +250,23 @@
   },
   "plannerNow": {
     "message": "현재"
+  },
+  "expandTitle": {
+    "message": "전체화면 시계"
+  },
+  "exitFullTitle": {
+    "message": "패널로 돌아가기"
+  },
+  "accent_sky": {
+    "message": "스카이"
+  },
+  "accent_mint": {
+    "message": "민트"
+  },
+  "accent_peach": {
+    "message": "피치"
+  },
+  "accent_lavender": {
+    "message": "라벤더"
   }
 }

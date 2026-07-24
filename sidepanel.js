@@ -5,6 +5,9 @@ const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 const pad = (n, w = 2) => String(n).padStart(w, "0");
 
+// 전체화면(몰입) 모드: sidepanel.html?full=1 로 새 탭에서 열림
+const FULL = new URLSearchParams(location.search).has("full");
+
 const store = {
   get: (keys) => chrome.storage.local.get(keys),
   set: (obj) => chrome.storage.local.set(obj),
@@ -72,6 +75,40 @@ $("#themeToggle").addEventListener("click", () => {
   store.set({ theme: settings.theme });
 });
 
+// 전체화면 토글: 패널 → 큰 시계 탭 열고 패널 닫기 / 탭 → 패널 복귀 후 탭 닫기
+const fullWin = FULL ? parseInt(new URLSearchParams(location.search).get("win")) : NaN;
+
+function closeThisTab() {
+  if (chrome.tabs && chrome.tabs.getCurrent) {
+    chrome.tabs.getCurrent((t) => t && chrome.tabs.remove(t.id));
+  } else {
+    window.close();
+  }
+}
+
+$("#expandBtn").addEventListener("click", () => {
+  if (FULL) {
+    // 이전 모드로 복귀: 같은 창의 사이드 패널을 다시 열고(제스처 유지 위해 먼저 동기 호출) 이 탭을 닫음
+    if (!Number.isNaN(fullWin) && chrome.sidePanel && chrome.sidePanel.open) {
+      chrome.sidePanel.open({ windowId: fullWin }).catch(() => {});
+    }
+    closeThisTab();
+    return;
+  }
+  // 패널 → 큰 시계 탭 열고 패널 닫기 (탭에 창 id를 넘겨 나중에 패널 복귀에 사용)
+  const openFull = (winId) => {
+    const q = winId != null ? `?full=1&win=${winId}` : "?full=1";
+    if (chrome.tabs && chrome.tabs.create) chrome.tabs.create({ url: chrome.runtime.getURL("sidepanel.html" + q) });
+    else window.open(chrome.runtime.getURL("sidepanel.html" + q), "_blank");
+    window.close(); // 사이드 패널 닫기
+  };
+  if (chrome.windows && chrome.windows.getCurrent) {
+    chrome.windows.getCurrent((w) => openFull(w && w.id));
+  } else {
+    openFull(null);
+  }
+});
+
 // ------------------------- 테마 색상 -------------------------
 // key = CSS data-accent 값(indigo는 기본이라 별도 블록 없음), color = 스와치 표시색(라이트 primary)
 const ACCENTS = [
@@ -83,6 +120,11 @@ const ACCENTS = [
   { key: "rose", color: "#e11d48" },
   { key: "amber", color: "#d97706" },
   { key: "slate", color: "#475569" },
+  // 밝은(파스텔) 테마
+  { key: "sky", color: "#7dd3fc" },
+  { key: "mint", color: "#6ee7b7" },
+  { key: "peach", color: "#fdba74" },
+  { key: "lavender", color: "#c4b5fd" },
 ];
 
 function applyAccent() {
@@ -155,6 +197,10 @@ $$(".seg").forEach((s) => s.addEventListener("click", () => switchView(s.dataset
 // ------------------------- 시계 (디지털 + 아날로그) -------------------------
 const analog = $("#analog");
 const actx = analog.getContext("2d");
+if (FULL) {
+  document.body.classList.add("full");
+  analog.width = analog.height = 560; // 큰 화면에서 선명하도록 버퍼 확대
+}
 const CLOCK_FACES = ["classic", "minimal", "roman", "arabic"];
 const ROMAN = ["XII", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"];
 
@@ -855,6 +901,26 @@ async function init() {
   settings.lastView = VIEWS.includes(s.lastView) ? s.lastView : "world";
 
   applyI18n();
+  // 몰입 모드: 확장 버튼을 '패널로 돌아가기(✕)'로, 시계를 누르면 개발자 블로그를 새 창으로
+  if (FULL) {
+    const b = $("#expandBtn");
+    b.textContent = "✕";
+    b.title = t("exitFullTitle");
+    b.setAttribute("aria-label", t("exitFullTitle"));
+
+    const openBlog = () => {
+      const u = ($("#linkBlog") && $("#linkBlog").href) || "https://swyoonlabs.blogspot.com/";
+      if (chrome.windows && chrome.windows.create) chrome.windows.create({ url: u });
+      else window.open(u, "_blank", "noopener");
+    };
+    ["#digitalTime", "#analog"].forEach((sel) => {
+      const el = $(sel);
+      if (!el) return;
+      el.style.cursor = "pointer";
+      el.title = t("aboutBlog");
+      el.addEventListener("click", openBlog);
+    });
+  }
   // 타이머 프리셋 라벨(분) 로케일 처리
   $$(".chip[data-sec]").forEach((c) => {
     c.textContent = t("nMin", [String(Math.round(c.dataset.sec / 60))]);

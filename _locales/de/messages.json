@@ -250,5 +250,23 @@
   },
   "plannerNow": {
     "message": "Jetzt"
+  },
+  "expandTitle": {
+    "message": "Vollbild-Uhr"
+  },
+  "exitFullTitle": {
+    "message": "Zurück zum Panel"
+  },
+  "accent_sky": {
+    "message": "Himmel"
+  },
+  "accent_mint": {
+    "message": "Minze"
+  },
+  "accent_peach": {
+    "message": "Pfirsich"
+  },
+  "accent_lavender": {
+    "message": "Lavendel"
   }
 }

@@ -250,5 +250,23 @@
   },
   "plannerNow": {
     "message": "Agora"
+  },
+  "expandTitle": {
+    "message": "Relógio em tela cheia"
+  },
+  "exitFullTitle": {
+    "message": "Voltar ao painel"
+  },
+  "accent_sky": {
+    "message": "Céu"
+  },
+  "accent_mint": {
+    "message": "Menta"
+  },
+  "accent_peach": {
+    "message": "Pêssego"
+  },
+  "accent_lavender": {
+    "message": "Lavanda"
   }
 }

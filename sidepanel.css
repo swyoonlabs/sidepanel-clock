@@ -11,6 +11,10 @@
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-hover: 0 8px 20px rgba(2, 6, 23, 0.12);
   --hero-bg: linear-gradient(160deg, #4f46e5 0%, #2563eb 100%);
+  /* 히어로 위의 글씨/컨트롤 색 — 밝은 배경 테마에서 어둡게 덮어씀 */
+  --hero-text: #ffffff;
+  --hero-line: rgba(255, 255, 255, 0.38);
+  --hero-fill: rgba(255, 255, 255, 0.14);
 }
 
 [data-theme="dark"] {
@@ -26,6 +30,9 @@
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   --shadow-hover: 0 8px 22px rgba(0, 0, 0, 0.5);
   --hero-bg: linear-gradient(160deg, #312e81 0%, #1e3a8a 100%);
+  --hero-text: #ffffff;
+  --hero-line: rgba(255, 255, 255, 0.38);
+  --hero-fill: rgba(255, 255, 255, 0.14);
 }
 
 /* ---------- 테마 색상 (indigo = 기본, data-accent 미지정 시 위 값) ---------- */
@@ -46,6 +53,18 @@
 :root[data-theme="dark"][data-accent="rose"]    { --primary: #fb7185; --accent: #fbbf24; --hero-bg: linear-gradient(160deg, #9f1239 0%, #881337 100%); }
 :root[data-theme="dark"][data-accent="amber"]   { --primary: #fbbf24; --accent: #818cf8; --hero-bg: linear-gradient(160deg, #b45309 0%, #9a3412 100%); }
 :root[data-theme="dark"][data-accent="slate"]   { --primary: #94a3b8; --accent: #f87171; --hero-bg: linear-gradient(160deg, #334155 0%, #0f172a 100%); }
+
+/* 밝은(파스텔) 테마 — 라이트 모드에선 배경이 밝아 글씨/컨트롤을 어둡게 덮어씀 */
+:root[data-accent="sky"]      { --primary: #0284c7; --accent: #f97316; --hero-bg: linear-gradient(160deg, #bae6fd 0%, #7dd3fc 100%); --hero-text: #0f172a; --hero-line: rgba(15,23,42,0.28); --hero-fill: rgba(15,23,42,0.07); }
+:root[data-accent="mint"]     { --primary: #059669; --accent: #f43f5e; --hero-bg: linear-gradient(160deg, #a7f3d0 0%, #6ee7b7 100%); --hero-text: #0f172a; --hero-line: rgba(15,23,42,0.28); --hero-fill: rgba(15,23,42,0.07); }
+:root[data-accent="peach"]    { --primary: #ea580c; --accent: #7c3aed; --hero-bg: linear-gradient(160deg, #fed7aa 0%, #fdba74 100%); --hero-text: #0f172a; --hero-line: rgba(15,23,42,0.28); --hero-fill: rgba(15,23,42,0.07); }
+:root[data-accent="lavender"] { --primary: #7c3aed; --accent: #db2777; --hero-bg: linear-gradient(160deg, #ddd6fe 0%, #c4b5fd 100%); --hero-text: #0f172a; --hero-line: rgba(15,23,42,0.28); --hero-fill: rgba(15,23,42,0.07); }
+
+/* 다크 모드에선 같은 파스텔 테마도 깊은 그라데이션 + 흰 글씨로 되돌림 */
+:root[data-theme="dark"][data-accent="sky"]      { --primary: #38bdf8; --accent: #fb923c; --hero-bg: linear-gradient(160deg, #075985 0%, #0c4a6e 100%); --hero-text: #ffffff; --hero-line: rgba(255,255,255,0.38); --hero-fill: rgba(255,255,255,0.14); }
+:root[data-theme="dark"][data-accent="mint"]     { --primary: #34d399; --accent: #fb7185; --hero-bg: linear-gradient(160deg, #065f46 0%, #064e3b 100%); --hero-text: #ffffff; --hero-line: rgba(255,255,255,0.38); --hero-fill: rgba(255,255,255,0.14); }
+:root[data-theme="dark"][data-accent="peach"]    { --primary: #fb923c; --accent: #a78bfa; --hero-bg: linear-gradient(160deg, #9a3412 0%, #7c2d12 100%); --hero-text: #ffffff; --hero-line: rgba(255,255,255,0.38); --hero-fill: rgba(255,255,255,0.14); }
+:root[data-theme="dark"][data-accent="lavender"] { --primary: #a78bfa; --accent: #f472b6; --hero-bg: linear-gradient(160deg, #5b21b6 0%, #4c1d95 100%); --hero-text: #ffffff; --hero-line: rgba(255,255,255,0.38); --hero-fill: rgba(255,255,255,0.14); }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; width: 100%; max-width: 100%; overflow-x: hidden; }
@@ -74,22 +93,51 @@ body {
   justify-content: center;
   gap: 6px;
   padding: 26px 12px 20px;
-  color: #fff;
+  color: var(--hero-text);
   background: var(--hero-bg);
 }
 .hero-theme {
   position: absolute;
   top: 10px;
   right: 10px;
-  color: #fff;
+  color: var(--hero-text);
 }
 .hero-info {
   position: absolute;
   top: 10px;
   left: 10px;
-  color: #fff;
+  color: var(--hero-text);
   font-size: 16px;
 }
+.hero-expand {
+  position: absolute;
+  top: 10px;
+  right: 46px;
+  color: var(--hero-text);
+}
+
+/* ---------- 전체화면(몰입) 모드: 큰 시계만 화면 가득 ---------- */
+body.full .segment,
+body.full .content,
+body.full .hero-info,
+body.full .hero-options,
+body.full .hero-swatches { display: none !important; }
+body.full { overflow: hidden; }
+body.full .hero {
+  flex: 1;
+  min-height: 100vh;
+  justify-content: center;
+  gap: 2vmin;
+}
+body.full #analog {
+  width: min(52vmin, 520px);
+  height: min(52vmin, 520px);
+  margin-bottom: 2vmin;
+}
+body.full .hero-time { font-size: clamp(72px, 20vmin, 240px); }
+body.full .hero-date { font-size: clamp(18px, 3.4vmin, 40px); margin-top: 1vmin; }
+body.full .hero-theme { top: 18px; right: 18px; font-size: 20px; }
+body.full .hero-expand { top: 18px; right: 54px; font-size: 20px; }
 #analog { width: 188px; height: 188px; margin-bottom: 8px; }
 
 .hero-time {
@@ -108,9 +156,9 @@ body {
 
 .hero-options { display: flex; gap: 7px; margin-top: 16px; }
 .opt {
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  border: 1px solid var(--hero-line);
+  background: var(--hero-fill);
+  color: var(--hero-text);
   padding: 7px 14px;
   border-radius: 999px;
   cursor: pointer;
@@ -118,7 +166,7 @@ body {
   font-weight: 500;
   transition: background 0.12s;
 }
-.opt:hover { background: rgba(255, 255, 255, 0.22); }
+.opt:hover { background: var(--hero-line); }
 .opt[data-on="true"] { background: #fff; color: var(--primary); border-color: #fff; font-weight: 600; }
 
 /* 테마 색상 스와치 */
@@ -134,14 +182,14 @@ body {
   height: 22px;
   padding: 0;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.45);
+  border: 2px solid var(--hero-line);
   cursor: pointer;
   transition: transform 0.12s;
 }
 .swatch:hover { transform: scale(1.15); }
 .swatch[aria-pressed="true"] {
-  border-color: #fff;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+  border-color: var(--hero-text);
+  box-shadow: 0 0 0 2px var(--hero-line);
 }
 
 .icon-btn {

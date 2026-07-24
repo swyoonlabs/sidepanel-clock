@@ -250,5 +250,23 @@
   },
   "plannerNow": {
     "message": "Now"
+  },
+  "expandTitle": {
+    "message": "Fullscreen clock"
+  },
+  "exitFullTitle": {
+    "message": "Back to panel"
+  },
+  "accent_sky": {
+    "message": "Sky"
+  },
+  "accent_mint": {
+    "message": "Mint"
+  },
+  "accent_peach": {
+    "message": "Peach"
+  },
+  "accent_lavender": {
+    "message": "Lavender"
   }
 }
